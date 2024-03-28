@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Correction page" parallel="classes" thread-count="5">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
+    <test name="Smoke suite">
+        <classes>
+            <class name="ui.basicnavigation.CheckCancelChangesButtonTest"/>
+            <class name="ui.basicnavigation.CheckChangeSurveyAnswersTest"/>
+            <class name="ui.basicnavigation.CheckClearedResponseTest"/>
+            <class name="ui.basicnavigation.CheckNumericSwitcherMenuTest"/>
+            <class name="ui.basicnavigation.CheckOtherSpecifyAnswerTest"/>
+
+        </classes>
+    </test>
+</suite>

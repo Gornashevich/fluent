@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="User Test Suite" parallel="classes" thread-count="4">
+    <test name="User test suite">
+        <parameter name="myName" value="aliaksandr.viartseika@marketonce.com"/>
+        <parameter name="myName2" value="testuser1@marketonce.com"/>
+        <parameter name="password" value="mo_Survey2023"/>
+        <parameter name="password2" value="QATest123!"/>
+
+        <classes>
+            <class name="ui.basicnavigation.CheckChangeMetaDataQuestionText"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Correction page" parallel="classes" thread-count="5">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
+    <test name="Extended path suite">
+        <classes>
+<!--            <class name="ui.basicnavigation.CheckImportSurveyAnswersTest"/>-->
+            <class name="ui.basicnavigation.CheckFiltersSideBarTest"/>
+            <class name="ui.basicnavigation.CheckDataTabUIValidationTest"/>
+            <class name="ui.basicnavigation.CheckChangeMetaDataQuestionTest"/>
+            <class name="ui.basicnavigation.CheckVirtualChoicesCreationOnMetaDataTest"/>
+            <class name="ui.basicnavigation.CheckVirtualChoicesOnDataPageTest"/>
+            <class name="ui.basicnavigation.CheckVirtualQuestionCreationOnMetaDataTest"/>
+            <class name="ui.basicnavigation.CheckMetaDataVirtualChoicesTest"/>
+        </classes>
+    </test>
+</suite>

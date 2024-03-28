@@ -1,0 +1,95 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.10.0'
+    id 'idea'
+}
+
+group 'com.marketonce'
+version '1.0-SNAPSHOT'
+
+def fluentleniumVersion = '5.0.4'
+def seleniumVersion = '4.11.0'
+def allureVersion = "2.21.0"
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+dependencies {
+    implementation "io.qameta.allure:allure-testng:$allureVersion"
+    implementation "io.qameta.allure:allure-rest-assured:$allureVersion"
+    implementation "io.qameta.allure:allure-assertj:$allureVersion"
+    implementation "io.rest-assured:rest-assured:5.3.0"
+    implementation "org.assertj:assertj-core:3.24.2"
+    implementation 'org.projectlombok:lombok:1.18.26'
+    testImplementation 'ru.yandex.qatools.ashot:ashot:1.5.4'
+
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+    testImplementation 'org.testng:testng:7.7.1'
+    implementation group: 'org.aeonbits.owner', name: 'owner', version: '1.0.12'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+    implementation group: 'org.fluentlenium', name: 'fluentlenium-core', version: fluentleniumVersion
+    implementation group: 'org.fluentlenium', name: 'fluentlenium-testng', version: fluentleniumVersion
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: seleniumVersion
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.5.2'
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.12.6.20220326"))
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-protobuf")
+}
+
+allureReport {
+    clean.set(true)
+}
+def regression = project.hasProperty("regression")
+def smoke = project.hasProperty("smoke")
+def criticalPath = project.hasProperty("criticalPath")
+def extended = project.hasProperty("extended")
+test {
+    useTestNG()
+            {
+                dependsOn cleanTest
+                useDefaultListeners = true
+                if(regression){
+                    suites "./src/test/resources/regression.xml"
+                }
+                if(smoke) {
+                    suites "./src/test/resources/smoke.xml"
+                }
+                if(criticalPath) {
+                    suites "./src/test/resources/criticalPath.xml"
+                }
+                if(extended) {
+                    suites "./src/test/resources/extended.xml"
+                }
+
+            }
+
+    testLogging {
+        events = [
+                TestLogEvent.STARTED,
+                TestLogEvent.PASSED,
+                TestLogEvent.FAILED,
+                TestLogEvent.SKIPPED,
+                TestLogEvent.STANDARD_ERROR,
+                TestLogEvent.STANDARD_OUT,
+        ]
+
+        exceptionFormat = TestExceptionFormat.FULL
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
+    }
+
+    finalizedBy("allureReport")
+}

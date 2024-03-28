@@ -1,0 +1,39 @@
+.env.properties
+
+.idea
+.gradle
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Maven ###
+target/
+
+### Allure ###
+allure-results/
+
+## Gradle files
+.gradle/
+build/
+out/
+
+## MAC OS files
+.DS_Store
+
+## VScode
+.classpath
+.project
+.settings/
+
+
+
+## appllication
+*.ipa
+
+## error
+*.err
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties

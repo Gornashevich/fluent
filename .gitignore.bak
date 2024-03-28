@@ -1,0 +1,38 @@
+.env.properties
+.build
+.idea
+.gradle
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Maven ###
+target/
+
+### Allure ###
+allure-results/
+
+## Gradle files
+.gradle/
+build/
+out/
+
+## MAC OS files
+.DS_Store
+
+## VScode
+.classpath
+.project
+.settings/
+
+## Temporary files
+pageSource/
+
+## appllication
+*.ipa
+
+## error
+*.err
